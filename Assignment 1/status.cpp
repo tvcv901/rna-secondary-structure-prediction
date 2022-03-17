@@ -2,40 +2,48 @@
 
 using namespace std;
 
-struct Point {
+struct Point
+{
     int x;
     int y;
 };
 
-struct Line {
+struct Line
+{
     Point p1;
     Point p2;
 };
 
-struct Node {
+struct Node
+{
     Line l;
     struct Node *left;
     struct Node *right;
     int height;
 };
 
-inline bool operator==(const Line l1, const Line l2) {
+inline bool operator==(const Line l1, const Line l2)
+{
     return ((l1.p1.x == l2.p1.x) && (l1.p1.y == l2.p1.y) && (l1.p2.x == l2.p2.x) && (l1.p2.y == l2.p2.y));
 }
 
-inline bool operator!=(const Line l1, const Line l2) {
+inline bool operator!=(const Line l1, const Line l2)
+{
     return !(l1 == l2);
 }
 
-inline bool operator<(const Line l1, const Line l2) {
+inline bool operator<(const Line l1, const Line l2)
+{
     return ((l1.p1.y > l2.p1.y) || ((l1.p1.y == l2.p1.y) && (l1.p1.x < l2.p1.x)));
 }
 
-inline bool operator>(const Line l1, const Line l2) {
+inline bool operator>(const Line l1, const Line l2)
+{
     return ((l1.p1.y < l2.p1.y) || ((l1.p1.y == l2.p1.y) && (l1.p1.x > l2.p1.x)));
 }
 
-ostream &operator<<(ostream &out, const Node *n) {
+ostream &operator<<(ostream &out, const Node *n)
+{
     out << "((" << n->l.p1.x << "," << n->l.p1.y << "),(" << n->l.p2.x << "," << n->l.p2.y << ")," << n->height << ")) ";
     return out;
 }
@@ -86,13 +94,15 @@ int main()
     postorder(avl);
 }
 
-int getHeight(struct Node *n) {
+int getHeight(struct Node *n)
+{
     if (n == NULL)
         return 0;
     return n->height;
 }
 
-struct Node *rightRotate(struct Node *x) {
+struct Node *rightRotate(struct Node *x)
+{
     struct Node *y = x->left;
     struct Node *z = y->right;
     y->right = x;
@@ -102,7 +112,8 @@ struct Node *rightRotate(struct Node *x) {
     return y;
 }
 
-struct Node *leftRotate(struct Node *x) {
+struct Node *leftRotate(struct Node *x)
+{
     struct Node *y = x->right;
     struct Node *T2 = y->left;
     y->left = x;
@@ -112,13 +123,15 @@ struct Node *leftRotate(struct Node *x) {
     return y;
 }
 
-int getBalanceFactor(struct Node *n) {
+int getBalanceFactor(struct Node *n)
+{
     if (n == NULL)
         return 0;
     return (getHeight(n->left) - getHeight(n->right));
 }
 
-struct Node *insertNode(struct Node *n, Line x) {
+struct Node *insertNode(struct Node *n, Line x)
+{
     if (n == NULL)
     {
         struct Node *temp = (struct Node *)malloc(sizeof(struct Node));
@@ -159,21 +172,24 @@ struct Node *insertNode(struct Node *n, Line x) {
     return n;
 }
 
-struct Node *lowestNode(struct Node *n) {
+struct Node *lowestNode(struct Node *n)
+{
     struct Node *cur = n;
     while (cur->left != NULL)
         cur = cur->left;
     return cur;
 }
 
-struct Node *highestNode(struct Node *n) {
+struct Node *highestNode(struct Node *n)
+{
     struct Node *cur = n;
     while (cur->right != NULL)
         cur = cur->right;
     return cur;
 }
 
-struct Node *above(struct Node *n, Line x) {
+struct Node *above(struct Node *n, Line x)
+{
     struct Node *pre = NULL;
     struct Node *cur = n;
     while (cur->l != x)
@@ -198,7 +214,8 @@ struct Node *above(struct Node *n, Line x) {
     return pre;
 }
 
-struct Node *below(struct Node *n, Line x) {
+struct Node *below(struct Node *n, Line x)
+{
     struct Node *suc = NULL;
     struct Node *cur = n;
     while (cur->l != x)
@@ -223,7 +240,8 @@ struct Node *below(struct Node *n, Line x) {
     return suc;
 }
 
-struct Node *deleteNode(struct Node *r, Line x) {
+struct Node *deleteNode(struct Node *r, Line x)
+{
     if (r == NULL)
         return r;
     if (x < r->l)
@@ -282,21 +300,24 @@ struct Node *deleteNode(struct Node *r, Line x) {
     return r;
 }
 
-struct Point createPoint(int a, int b) {
+struct Point createPoint(int a, int b)
+{
     struct Point p;
     p.x = a;
     p.y = b;
     return p;
 }
 
-struct Line createLine(int a, int b, int c, int d) {
+struct Line createLine(int a, int b, int c, int d)
+{
     struct Line l;
     l.p1 = createPoint(a, b);
     l.p2 = createPoint(c, d);
     return l;
 }
 
-void preorder(struct Node *n) {
+void preorder(struct Node *n)
+{
     if (n != NULL)
     {
         cout << n;
@@ -305,7 +326,8 @@ void preorder(struct Node *n) {
     }
 }
 
-void inorder(struct Node *n) {
+void inorder(struct Node *n)
+{
     if (n != NULL)
     {
         inorder(n->left);
@@ -314,7 +336,8 @@ void inorder(struct Node *n) {
     }
 }
 
-void postorder(struct Node *n) {
+void postorder(struct Node *n)
+{
     if (n == NULL)
         return;
     postorder(n->left);
