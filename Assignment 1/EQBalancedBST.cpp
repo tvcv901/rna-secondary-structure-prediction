@@ -23,6 +23,14 @@ int EQBalancedBST::getHeight(Node *curNode)
     return curNode->height;
 }
 
+Point EQBalancedBST::createPoint(int x, int y)
+{
+    Point p;
+    p.x = x;
+    p.y = y;
+    return p;
+}
+
 Node *EQBalancedBST::createNode(Point p)
 {
     Node *node = new Node;

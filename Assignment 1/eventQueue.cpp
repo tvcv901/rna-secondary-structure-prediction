@@ -29,9 +29,7 @@ int main()
             cout << "Enter coordinates of point to be inserted in the format: x y\n";
             int x, y;
             cin >> x >> y;
-            Point p;
-            p.x = x;
-            p.y = y;
+            Point p = bst.createPoint(x, y);
 
             bst.root = bst.insertNode(bst.root, p);
             cout << '\n';
