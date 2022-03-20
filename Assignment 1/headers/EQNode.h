@@ -2,16 +2,22 @@
 #define NODE_H
 
 #include <iostream>
-#include "EQPoint.h"
+#include "Point.h"
 
 using namespace std;
 
-struct Node
+struct PointNode
 {
     Point point;
-    Node *left;
-    Node *right;
+    PointNode *left;
+    PointNode *right;
     int height;
 };
+
+ostream &operator<<(ostream &out, const PointNode *curNode)
+{
+    out << "Point: " << curNode->point << ", Height: " << curNode->height << "\n";
+    return out;
+}
 
 #endif

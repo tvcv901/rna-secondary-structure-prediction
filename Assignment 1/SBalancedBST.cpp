@@ -1,19 +1,19 @@
 #include <iostream>
-#include ".\headers\SPoint.h"
+#include ".\headers\Point.h"
 #include ".\headers\SLine.h"
 #include ".\headers\SNode.h"
 #include ".\headers\status.h"
 
 using namespace std;
 
-int SBalancedBST::getBalanceFactor(Node *curNode)
+int SBalancedBST::getBalanceFactor(LineNode *curNode)
 {
     if (curNode == NULL)
         return 0;
     return (getHeight(curNode->left) - getHeight(curNode->right));
 }
 
-int SBalancedBST::getHeight(Node *curNode)
+int SBalancedBST::getHeight(LineNode *curNode)
 {
     if (curNode == NULL)
         return 0;
@@ -36,9 +36,9 @@ Line SBalancedBST::createLine(int x1, int y1, int x2, int y2)
     return l;
 }
 
-Node *SBalancedBST::createNode(Line l)
+LineNode *SBalancedBST::createNode(Line l)
 {
-    Node *node = new Node;
+    LineNode *node = new LineNode;
     node->line = l;
     node->left = NULL;
     node->right = NULL;
@@ -46,10 +46,10 @@ Node *SBalancedBST::createNode(Line l)
     return node;
 }
 
-Node *SBalancedBST::leftRotate(Node *x)
+LineNode *SBalancedBST::leftRotate(LineNode *x)
 {
-    Node *y = x->right;
-    Node *T2 = y->left;
+    LineNode *y = x->right;
+    LineNode *T2 = y->left;
     y->left = x;
     x->right = T2;
     x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
@@ -57,10 +57,10 @@ Node *SBalancedBST::leftRotate(Node *x)
     return y;
 }
 
-Node *SBalancedBST::rightRotate(Node *x)
+LineNode *SBalancedBST::rightRotate(LineNode *x)
 {
-    Node *y = x->left;
-    Node *z = y->right;
+    LineNode *y = x->left;
+    LineNode *z = y->right;
     y->right = x;
     x->left = z;
     x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
@@ -68,11 +68,11 @@ Node *SBalancedBST::rightRotate(Node *x)
     return y;
 }
 
-Node *SBalancedBST::insertNode(Node *curNode, Line l)
+LineNode *SBalancedBST::insertNode(LineNode *curNode, Line l)
 {
     if (curNode == NULL)
     {
-        struct Node *temp = createNode(l);
+        struct LineNode *temp = createNode(l);
         return temp;
     }
     if (l < curNode->line)
@@ -106,26 +106,26 @@ Node *SBalancedBST::insertNode(Node *curNode, Line l)
     return curNode;
 }
 
-Node *SBalancedBST::getLowestNode(Node *curNode)
+LineNode *SBalancedBST::getLowestNode(LineNode *curNode)
 {
-    Node *lowestNode = curNode;
+    LineNode *lowestNode = curNode;
     while (lowestNode->left != NULL)
         lowestNode = lowestNode->left;
     return lowestNode;
 }
 
-Node *SBalancedBST::getHighestNode(Node *curNode)
+LineNode *SBalancedBST::getHighestNode(LineNode *curNode)
 {
-    Node *highestNode = curNode;
+    LineNode *highestNode = curNode;
     while (highestNode->right != NULL)
         highestNode = highestNode->right;
     return highestNode;
 }
 
-Node *SBalancedBST::above(Node *curNode, Line l)
+LineNode *SBalancedBST::above(LineNode *curNode, Line l)
 {
-    Node *pre = NULL;
-    Node *cur = curNode;
+    LineNode *pre = NULL;
+    LineNode *cur = curNode;
     while (cur->line != l)
     {
         if (l > cur->line)
@@ -148,10 +148,10 @@ Node *SBalancedBST::above(Node *curNode, Line l)
     return pre;
 }
 
-Node *SBalancedBST::below(Node *curNode, Line l)
+LineNode *SBalancedBST::below(LineNode *curNode, Line l)
 {
-    Node *suc = NULL;
-    Node *cur = curNode;
+    LineNode *suc = NULL;
+    LineNode *cur = curNode;
     while (cur->line != l)
     {
         if (l < cur->line)
@@ -174,7 +174,7 @@ Node *SBalancedBST::below(Node *curNode, Line l)
     return suc;
 }
 
-Node *SBalancedBST::deleteNode(Node *curNode, Line l)
+LineNode *SBalancedBST::deleteNode(LineNode *curNode, Line l)
 {
     if (curNode == NULL)
         return curNode;
@@ -186,7 +186,7 @@ Node *SBalancedBST::deleteNode(Node *curNode, Line l)
     {
         if ((curNode->left == NULL) || (curNode->right == NULL))
         {
-            Node *temp;
+            LineNode *temp;
             if (curNode->left != NULL)
                 temp = curNode->left;
             else
@@ -202,7 +202,7 @@ Node *SBalancedBST::deleteNode(Node *curNode, Line l)
         }
         else
         {
-            Node *temp = getLowestNode(curNode->right);
+            LineNode *temp = getLowestNode(curNode->right);
             curNode->line = temp->line;
             curNode->right = deleteNode(curNode->right, temp->line);
         }
@@ -234,7 +234,7 @@ Node *SBalancedBST::deleteNode(Node *curNode, Line l)
     return curNode;
 }
 
-void SBalancedBST::preorder(Node *curNode)
+void SBalancedBST::preorder(LineNode *curNode)
 {
     if (curNode != NULL)
     {
@@ -244,7 +244,7 @@ void SBalancedBST::preorder(Node *curNode)
     }
 }
 
-void SBalancedBST::inorder(Node *curNode)
+void SBalancedBST::inorder(LineNode *curNode)
 {
     if (curNode != NULL)
     {
@@ -254,7 +254,7 @@ void SBalancedBST::inorder(Node *curNode)
     }
 }
 
-void SBalancedBST::postorder(Node *curNode)
+void SBalancedBST::postorder(LineNode *curNode)
 {
     if (curNode == NULL)
         return;
@@ -263,14 +263,17 @@ void SBalancedBST::postorder(Node *curNode)
     cout << curNode;
 }
 
-void SBalancedBST::printTraversals(Node *curNode)
+void SBalancedBST::printTraversals(LineNode *curNode)
 {
     cout << "Inorder Traversal:\n";
     inorder(curNode);
+    cout << '\n';
 
     cout << "Preorder Traversal:\n";
     preorder(curNode);
+    cout << '\n';
 
     cout << "Postorder Traversal:\n";
     postorder(curNode);
+    cout << '\n';
 }

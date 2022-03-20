@@ -1,5 +1,5 @@
 #include <iostream>
-#include ".\headers\SPoint.h"
+#include ".\headers\Point.h"
 #include ".\headers\SLine.h"
 #include ".\headers\SNode.h"
 #include ".\headers\status.h"

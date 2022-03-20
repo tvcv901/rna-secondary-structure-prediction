@@ -2,7 +2,7 @@
 #define LINE_H
 
 #include <iostream>
-#include "SPoint.h"
+#include "Point.h"
 
 using namespace std;
 

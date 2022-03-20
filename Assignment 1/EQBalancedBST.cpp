@@ -1,21 +1,21 @@
 #include <iostream>
-#include ".\headers\EQPoint.h"
+#include ".\headers\Point.h"
 #include ".\headers\EQNode.h"
 #include ".\headers\EventQueue.h"
 
 using namespace std;
 
-int EQBalancedBST::getBalanceFactor(Node *curNode)
+int EQBalancedBST::getBalanceFactor(PointNode *curNode)
 {
     if (curNode == NULL)
         return 0;
 
-    Node *leftNode = curNode->left;
-    Node *rightNode = curNode->right;
+    PointNode *leftNode = curNode->left;
+    PointNode *rightNode = curNode->right;
     return (getHeight(leftNode) - getHeight(rightNode));
 }
 
-int EQBalancedBST::getHeight(Node *curNode)
+int EQBalancedBST::getHeight(PointNode *curNode)
 {
     if (curNode == NULL)
         return 0;
@@ -31,20 +31,20 @@ Point EQBalancedBST::createPoint(int x, int y)
     return p;
 }
 
-Node *EQBalancedBST::createNode(Point p)
+PointNode *EQBalancedBST::createNode(Point p)
 {
-    Node *node = new Node;
+    PointNode *node = new PointNode;
     node->point = p;
     node->height = 1;
     node->left = node->right = NULL;
     return node;
 }
 
-Node *EQBalancedBST::leftRotate(Node *curNode)
+PointNode *EQBalancedBST::leftRotate(PointNode *curNode)
 {
-    Node *x = curNode;
-    Node *y = x->right;
-    Node *b = y->left;
+    PointNode *x = curNode;
+    PointNode *y = x->right;
+    PointNode *b = y->left;
 
     y->left = x;
     x->right = b;
@@ -55,11 +55,11 @@ Node *EQBalancedBST::leftRotate(Node *curNode)
     return y;
 }
 
-Node *EQBalancedBST::rightRotate(Node *curNode)
+PointNode *EQBalancedBST::rightRotate(PointNode *curNode)
 {
-    Node *y = curNode;
-    Node *x = y->left;
-    Node *b = x->right;
+    PointNode *y = curNode;
+    PointNode *x = y->left;
+    PointNode *b = x->right;
 
     x->right = y;
     y->left = b;
@@ -70,55 +70,55 @@ Node *EQBalancedBST::rightRotate(Node *curNode)
     return x;
 }
 
-Node *EQBalancedBST::getMin(Node *curNode)
+PointNode *EQBalancedBST::getMin(PointNode *curNode)
 {
-    Node *minNode = curNode;
+    PointNode *minNode = curNode;
     while (minNode->left != NULL)
         minNode = minNode->left;
 
     return minNode;
 }
 
-void EQBalancedBST::printInorderTraversal(Node *curNode)
+void EQBalancedBST::printInorderTraversal(PointNode *curNode)
 {
     if (curNode == NULL)
         return;
 
     printInorderTraversal(curNode->left);
-    cout << (curNode->point).x << " " << (curNode->point).y << '\n';
+    cout << curNode;
     printInorderTraversal(curNode->right);
 }
 
-void EQBalancedBST::printPreorderTraversal(Node *curNode)
+void EQBalancedBST::printPreorderTraversal(PointNode *curNode)
 {
     if (curNode == NULL)
         return;
 
-    cout << (curNode->point).x << " " << (curNode->point).y << '\n';
+    cout << curNode;
     printPreorderTraversal(curNode->left);
     printPreorderTraversal(curNode->right);
 }
 
-void EQBalancedBST::printPostorderTraversal(Node *curNode)
+void EQBalancedBST::printPostorderTraversal(PointNode *curNode)
 {
     if (curNode == NULL)
         return;
 
     printPostorderTraversal(curNode->left);
     printPostorderTraversal(curNode->right);
-    cout << (curNode->point).x << " " << (curNode->point).y << '\n';
+    cout << curNode;
 }
 
-Node *EQBalancedBST::insertNode(Node *curNode, Point p)
+PointNode *EQBalancedBST::insertNode(PointNode *curNode, Point p)
 {
     if (curNode == NULL)
     {
-        Node *newNode = createNode(p);
+        PointNode *newNode = createNode(p);
         return newNode;
     }
 
-    Node *leftNode = curNode->left;
-    Node *rightNode = curNode->right;
+    PointNode *leftNode = curNode->left;
+    PointNode *rightNode = curNode->right;
 
     if (p < curNode->point)
     {
@@ -164,7 +164,7 @@ Node *EQBalancedBST::insertNode(Node *curNode, Point p)
     return curNode;
 }
 
-Node *EQBalancedBST::findNode(Node *curNode, Point p)
+PointNode *EQBalancedBST::findNode(PointNode *curNode, Point p)
 {
     if (curNode == NULL || curNode->point == p)
         return curNode;
@@ -175,7 +175,7 @@ Node *EQBalancedBST::findNode(Node *curNode, Point p)
     return findNode(curNode->right, p);
 }
 
-Node *EQBalancedBST::deleteNode(Node *curNode, Point p)
+PointNode *EQBalancedBST::deleteNode(PointNode *curNode, Point p)
 {
     if (curNode == NULL)
         return curNode;
@@ -188,7 +188,7 @@ Node *EQBalancedBST::deleteNode(Node *curNode, Point p)
     {
         if (curNode->left != NULL && curNode->right != NULL)
         {
-            Node *nextLargest = getMin(curNode->right);
+            PointNode *nextLargest = getMin(curNode->right);
             curNode->point = nextLargest->point;
             curNode->right = deleteNode(curNode->right, curNode->point);
         }
@@ -201,7 +201,7 @@ Node *EQBalancedBST::deleteNode(Node *curNode, Point p)
         {
             // Note: you do not have to find next largest (or smallest) in this case
             // (since tree is balanced, the left or right node will replace the node to be deleted)
-            Node *temp = curNode;
+            PointNode *temp = curNode;
             if (curNode->left != NULL)
             {
                 curNode = curNode->left;
@@ -248,7 +248,7 @@ Node *EQBalancedBST::deleteNode(Node *curNode, Point p)
     return curNode;
 }
 
-void EQBalancedBST::printTraversals(Node *curNode)
+void EQBalancedBST::printTraversals(PointNode *curNode)
 {
     cout << "Inorder Traversal:\n";
     printInorderTraversal(curNode);

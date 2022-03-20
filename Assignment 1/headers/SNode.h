@@ -2,22 +2,22 @@
 #define NODE_H
 
 #include <iostream>
-#include "SPoint.h"
+#include "Point.h"
 #include "SLine.h"
 
 using namespace std;
 
-struct Node
+struct LineNode
 {
     Line line;
-    Node *left;
-    Node *right;
+    LineNode *left;
+    LineNode *right;
     int height;
 };
 
-ostream &operator<<(ostream &out, const Node *n)
+ostream &operator<<(ostream &out, const LineNode *curNode)
 {
-    out << "Line: ( (" << n->line.p1.x << ", " << n->line.p1.y << "), (" << n->line.p2.x << ", " << n->line.p2.y << ") ), Height: " << n->height << "\n";
+    out << "Line: ( (" << curNode->line.p1.x << ", " << curNode->line.p1.y << "), (" << curNode->line.p2.x << ", " << curNode->line.p2.y << ") ), Height: " << curNode->height << "\n";
     return out;
 }
 

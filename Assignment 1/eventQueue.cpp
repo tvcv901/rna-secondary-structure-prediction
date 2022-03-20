@@ -1,5 +1,5 @@
 #include <iostream>
-#include ".\headers\EQPoint.h"
+#include ".\headers\Point.h"
 #include ".\headers\EQNode.h"
 #include ".\headers\EventQueue.h"
 #include "EQBalancedBST.cpp"
@@ -41,11 +41,9 @@ int main()
             cout << "Enter coordinates of point to be searched in the format: x y\n";
             int x, y;
             cin >> x >> y;
-            Point p;
-            p.x = x;
-            p.y = y;
+            Point p = bst.createPoint(x, y);
 
-            Node *node = bst.findNode(bst.root, p);
+            PointNode *node = bst.findNode(bst.root, p);
             if (node != NULL)
             {
                 cout << node->point << '\n';

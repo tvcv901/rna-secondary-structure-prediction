@@ -10,10 +10,10 @@ struct Point
     int x;
     int y;
 
-    inline void operator=(const Point a)
+    inline void operator=(const Point p)
     {
-        this->x = a.x;
-        this->y = a.y;
+        this->x = p.x;
+        this->y = p.y;
     }
 };
 
@@ -57,7 +57,7 @@ inline bool operator<=(const Point a, const Point b)
 
 ostream &operator<<(ostream &output, const Point p)
 {
-    output << "( " << p.x << ", " << p.y << " )\n";
+    output << "( " << p.x << ", " << p.y << " )";
     return output;
 }
 
