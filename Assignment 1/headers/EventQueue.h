@@ -12,7 +12,7 @@ class EQBalancedBST
 public:
     int getBalanceFactor(PointNode *curNode);
     int getHeight(PointNode *curNode);
-    Point createPoint(int x, int y);
+    Point createPoint(float x, float y);
     PointNode *createNode(Point p);
     PointNode *leftRotate(PointNode *curNode);
     PointNode *rightRotate(PointNode *curNode);

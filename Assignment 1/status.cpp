@@ -27,7 +27,7 @@ int main()
         case 1:
         {
             cout << "Enter endpoints of line to be inserted in the format: x1 y1 x2 y2\n";
-            int x1, y1, x2, y2;
+            float x1, y1, x2, y2;
             cin >> x1 >> y1 >> x2 >> y2;
             Line l = bst.createLine(x1, y1, x2, y2);
 
@@ -39,7 +39,7 @@ int main()
         case 2:
         {
             cout << "Enter endpoints of line to be deleted in the format: x1 y1 x2 y2\n";
-            int x1, y1, x2, y2;
+            float x1, y1, x2, y2;
             cin >> x1 >> y1 >> x2 >> y2;
             Line l = bst.createLine(x1, y1, x2, y2);
 

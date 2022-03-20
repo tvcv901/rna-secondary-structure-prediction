@@ -2,13 +2,17 @@
 #define POINT_H
 
 #include <iostream>
+#include <math.h>
+#define EPSILON 1e-9
 
 using namespace std;
 
+bool isEqual(float a, float b);
+
 struct Point
 {
-    int x;
-    int y;
+    float x;
+    float y;
 
     inline void operator=(const Point p)
     {
@@ -17,42 +21,47 @@ struct Point
     }
 };
 
+bool isEqual(float a, float b)
+{
+    return fabs(a - b) < EPSILON;
+}
+
 inline bool operator==(const Point a, const Point b)
 {
-    return (a.x == b.x && a.y == b.y);
+    return (isEqual(a.x, b.x) && isEqual(a.y, b.y));
 }
 
 inline bool operator!=(const Point a, const Point b)
 {
-    return (a.x != b.x || a.y != b.y);
+    return !(a == b);
 }
 
 inline bool operator>(const Point a, const Point b)
 {
-    if (a.y == b.y)
+    if (isEqual(a.y, b.y))
+    {
+        if (isEqual(a.x, b.x))
+            return false;
         return a.x > b.x;
+    }
     return a.y < b.y;
 }
 
 inline bool operator>=(const Point a, const Point b)
 {
-    if (a.y == b.y)
-        return a.x >= b.x;
+    if (isEqual(a.y, b.y))
+        return (isEqual(a.x, b.x) || a.x > b.x);
     return a.y < b.y;
 }
 
 inline bool operator<(const Point a, const Point b)
 {
-    if (a.y == b.y)
-        return a.x < b.x;
-    return a.y > b.y;
+    return !(a >= b);
 }
 
 inline bool operator<=(const Point a, const Point b)
 {
-    if (a.y == b.y)
-        return a.x <= b.x;
-    return a.y > b.y;
+    return !(a > b);
 }
 
 ostream &operator<<(ostream &output, const Point p)

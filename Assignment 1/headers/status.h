@@ -13,8 +13,8 @@ class SBalancedBST
 public:
     int getBalanceFactor(LineNode *curNode);
     int getHeight(LineNode *curNode);
-    Point createPoint(int x, int y);
-    Line createLine(int x1, int y1, int x2, int y2);
+    Point createPoint(float x, float y);
+    Line createLine(float x1, float y1, float x2, float y2);
     LineNode *createNode(Line l);
     LineNode *leftRotate(LineNode *curNode);
     LineNode *rightRotate(LineNode *curNode);

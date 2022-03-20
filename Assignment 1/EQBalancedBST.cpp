@@ -23,7 +23,7 @@ int EQBalancedBST::getHeight(PointNode *curNode)
     return curNode->height;
 }
 
-Point EQBalancedBST::createPoint(int x, int y)
+Point EQBalancedBST::createPoint(float x, float y)
 {
     Point p;
     p.x = x;
@@ -179,13 +179,13 @@ PointNode *EQBalancedBST::deleteNode(PointNode *curNode, Point p)
 {
     if (curNode == NULL)
         return curNode;
-
     if (p < curNode->point)
         curNode->left = deleteNode(curNode->left, p);
     else if (p > curNode->point)
         curNode->right = deleteNode(curNode->right, p);
     else
     {
+        PointNode *temp;
         if (curNode->left != NULL && curNode->right != NULL)
         {
             PointNode *nextLargest = getMin(curNode->right);
@@ -194,26 +194,25 @@ PointNode *EQBalancedBST::deleteNode(PointNode *curNode, Point p)
         }
         else if (curNode->left == NULL && curNode->right == NULL)
         {
+            temp = curNode;
             curNode = NULL;
-            free(curNode);
+            free(temp);
         }
         else
         {
             // Note: you do not have to find next largest (or smallest) in this case
             // (since tree is balanced, the left or right node will replace the node to be deleted)
-            PointNode *temp = curNode;
             if (curNode->left != NULL)
             {
-                curNode = curNode->left;
-                curNode->left = temp;
-                free(curNode);
+                temp = curNode->left;
+                *curNode = *temp;
             }
             else
             {
-                curNode = curNode->right;
-                curNode->right = temp;
-                free(curNode);
+                temp = curNode->right;
+                *curNode = *temp;
             }
+            free(temp);
         }
     }
 
