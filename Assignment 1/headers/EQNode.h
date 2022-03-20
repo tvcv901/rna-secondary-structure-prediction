@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef EQNODE_H
+#define EQNODE_H
 
 #include <iostream>
 #include "Point.h"

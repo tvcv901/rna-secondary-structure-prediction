@@ -1,5 +1,5 @@
-#ifndef BALANCED_BST_H
-#define BALANCED_BST_H
+#ifndef EQBALANCED_BST_H
+#define EQBALANCED_BST_H
 
 #include <iostream>
 #include "Point.h"

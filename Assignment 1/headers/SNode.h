@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef SNODE_H
+#define SNODE_H
 
 #include <iostream>
 #include "Point.h"
