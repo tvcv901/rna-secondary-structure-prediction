@@ -16,7 +16,7 @@
 
 ### Steps to run `eventQueue.cpp` and `status.cpp` (Works only in a Windows environment)
 
-1. Open Command Prompt or Powershell and run `make` in the root directory of the project (make sure you have GNUMake installed on your machine)
+1. Open Command Prompt or Powershell and run `make` in the `Assignment 1` folder of the project (make sure you have GNUMake installed on your machine)
 2. Run `.\EQoutput.exe` to test the event queue data structure<br>
    Run `.\SBoutput.exe` to test the status data structure<br>
 3. Run `make clean` to remove object files and executable files
