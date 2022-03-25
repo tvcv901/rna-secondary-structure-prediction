@@ -9,10 +9,13 @@ using namespace std;
 
 bool isEqual(float a, float b);
 
+class SBalancedBST;
+
 struct Point
 {
     float x;
     float y;
+    SBalancedBST *l, *u, *c;
 
     inline void operator=(const Point p)
     {

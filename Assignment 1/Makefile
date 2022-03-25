@@ -19,4 +19,4 @@ main.o: main.cpp
 	g++ -c main.cpp
 
 clean:
-	del .\*.o .\*.exe .\*.gch
+	del .\*.o .\*.exe .\*.gch .\output.txt

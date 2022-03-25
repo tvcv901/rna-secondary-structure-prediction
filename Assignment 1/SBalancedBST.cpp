@@ -28,11 +28,12 @@ Point SBalancedBST::createPoint(float x, float y)
     return p;
 }
 
-Line SBalancedBST::createLine(float x1, float y1, float x2, float y2)
+Line SBalancedBST::createLine(float x1, float y1, float x2, float y2, int lineNo)
 {
     Line l;
     l.p1 = createPoint(x1, y1);
     l.p2 = createPoint(x2, y2);
+    l.lineNo = lineNo;
     return l;
 }
 
@@ -72,8 +73,8 @@ LineNode *SBalancedBST::insertNode(LineNode *curNode, Line l)
 {
     if (curNode == NULL)
     {
-        struct LineNode *temp = createNode(l);
-        return temp;
+        LineNode *newNode = createNode(l);
+        return newNode;
     }
     if (l < curNode->line)
         curNode->left = insertNode(curNode->left, l);
@@ -122,7 +123,7 @@ LineNode *SBalancedBST::getHighestNode(LineNode *curNode)
     return highestNode;
 }
 
-LineNode *SBalancedBST::above(LineNode *curNode, Line l)
+LineNode *SBalancedBST::getLeftNode(LineNode *curNode, Line l)
 {
     LineNode *pre = NULL;
     LineNode *cur = curNode;
@@ -148,7 +149,7 @@ LineNode *SBalancedBST::above(LineNode *curNode, Line l)
     return pre;
 }
 
-LineNode *SBalancedBST::below(LineNode *curNode, Line l)
+LineNode *SBalancedBST::getRightNode(LineNode *curNode, Line l)
 {
     LineNode *suc = NULL;
     LineNode *cur = curNode;

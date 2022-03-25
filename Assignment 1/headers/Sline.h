@@ -6,10 +6,13 @@
 
 using namespace std;
 
+int y_sweepLine; // y coordinate of sweep line
+
 struct Line
 {
     Point p1;
     Point p2;
+    int lineNo;
 
     inline void operator=(const Line l)
     {
@@ -18,24 +21,45 @@ struct Line
     }
 };
 
-inline bool operator==(const Line l1, const Line l2)
+float getX(Line a);
+
+inline bool operator==(const Line a, const Line b)
 {
-    return ((l1.p1.x == l2.p1.x) && (l1.p1.y == l2.p1.y) && (l1.p2.x == l2.p2.x) && (l1.p2.y == l2.p2.y));
+    return (a.p1 == b.p1 && a.p2 == b.p2);
 }
 
-inline bool operator!=(const Line l1, const Line l2)
+inline bool operator!=(const Line a, const Line b)
 {
-    return !(l1 == l2);
+    return !(a == b);
 }
 
-inline bool operator<(const Line l1, const Line l2)
+inline bool operator>(const Line a, const Line b)
 {
-    return ((l1.p1.y > l2.p1.y) || ((l1.p1.y == l2.p1.y) && (l1.p1.x < l2.p1.x)));
+    float x1 = getX(a), x2 = getX(b);
+    return (x1 > x2);
 }
 
-inline bool operator>(const Line l1, const Line l2)
+inline bool operator>=(const Line a, const Line b)
 {
-    return ((l1.p1.y < l2.p1.y) || ((l1.p1.y == l2.p1.y) && (l1.p1.x > l2.p1.x)));
+    float x1 = getX(a), x2 = getX(b);
+    return (isEqual(x1, x2) || x1 > x2);
+}
+
+inline bool operator<(const Line a, const Line b)
+{
+    return !(a >= b);
+}
+
+inline bool operator<=(const Line a, const Line b)
+{
+    return !(a > b);
+}
+
+float getX(Line a)
+{
+    float m_inv = (a.p2.x - a.p1.x) / (a.p2.y - a.p1.y);
+    float x = a.p1.x + (y_sweepLine - a.p1.y) * m_inv;
+    return x;
 }
 
 #endif
