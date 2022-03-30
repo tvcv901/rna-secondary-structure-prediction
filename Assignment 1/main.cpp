@@ -8,15 +8,133 @@
 #include "EQBalancedBST.cpp"
 #include "SBalancedBST.cpp"
 
+/*! \mainpage Sweep-Line Algorithm
+ *
+ * \section problem_statement_sec Problem Statement
+ *
+ * We are given a set of `n` line segments on a plane. The goal of the problem is to find all the intersections of the line segments and report them.
+ *
+ * \section algorithm_sec Algorithm
+ *
+ * <ul>
+ *  <li>The sweep line is a horizontal line that sweeps the plane from top to bottom.
+ *  <li>While we sweep the sweep line, we need to keep a track of the line segments that are intersecting the sweep line. These set of line segments form the status.
+ *  <li>As the sweep line moves downwards, line segments get added to the status or removed from the status.
+ *  <li>However, the status only changes at certain points - these points are called event points.
+ *  <li>When status is updated, the algorithm performs some intersection tests to checks whether line segments intersect. If the lines intersect, the intersection point is added to the event queue.
+ *  <li>Once the sweep line reaches the bottom of the plane, we will have all our intersection points.
+ * </ul>
+ *
+ * \section implementation_sec Implementation
+ *
+ * \subsection status-subsec Status
+ * The status has the following properties:
+ * <ul>
+ *  <li>The status contains the line segments intersected by the sweep line from left to right.
+ *  <li>New lines can be added to the status or existing lines can be deleted from the status.
+ *  <li>The status does not store duplicate line segments
+ * </ul>
+ * To implement the status data structure, all the above properties need to be satisfied, which can be achieved with the help of a balanced binary search tree (like AVL tree or a Red-Black tree).
+ *
+ * \subsection event-queue-subsec Event Queue
+ * The event queue has the following properties:
+ * <ul>
+ *  <li>The event queue contains the points stored from top to bottom. If multiple points are present at the same height, then the leftmost point is present in the event queue first.
+ *  <li>New event points can be added to the event queue or existing points can be deleted from the event queue.
+ *  <li>The event queue does not store duplicate points.
+ * </ul>
+ * To implement the event queue data structure, all the above properties need to be satisfied, which can also be achieved with the help of a balanced binary search tree.
+ * <br><br>
+ * With the help of a balanced binary search tree, we can perform insert, find, delete operations in logarithmic (to size of the tree) time.
+ *
+ * \section complexity_sec Complexity
+ *
+ * The total time taken by the sweep line algorithm is `O(nlogn + klogn)`, where:
+ * <ul>
+ *  <li>`n` is the number of line segments given
+ *  <li>`k` is the number of intersections for the `n` line segments.
+ * </ul>
+ * The running time of the sweep line algorithm is dependent on the input size (number of line segments), as well as the output size (number of intersections).
+ * <br>
+ * Hence the sweep line algorithm is an <i>output-sensitive</i> algorithm.
+ * <br><br>
+ * The space taken by the sweep line algorithm is `O(n)`.
+ *
+ */
+
 using namespace std;
 
+/**
+ * @brief Creates the L, U and C sets for a point (as per the sweep line algorithm).
+ *
+ * @param p Point for which the sets are to be created.
+ */
 void createSet(Point *p);
+
+/**
+ * @brief When the sweep line passes through an event point, the status data structure needs to be updated.
+ *
+ * @param p The event point.
+ */
 void handleEventPoint(Point p);
+
+/**
+ * @brief Iterates through a balanced BST and adds/removes lines present in the balanced BST to/from status.
+ *
+ * @param curNode Pointer to the root of the balanced BST which will be iterated through.
+ * @param add If add is false, lines will be removed from status. If add is true, lines will be added to status.
+ */
 void dfs(LineNode *curNode, bool add); // for removing or adding lines to status
+
+/**
+ * @brief Checks if two line segments intersect and adds the intersection point to the event queue if not handled already.
+ *
+ * @param sl first Line.
+ * @param sr second Line.
+ * @param p Event point that has just been handled.
+ */
 void findNewEvent(Line sl, Line sr, Point p);
+
+/**
+ * @brief Checks if two line segments intersect or not
+ *
+ * @param l1 first Line.
+ * @param l2 second Line.
+ * @return true if l1 and l2 intersect.
+ * @return false if l1 and l2 do not intersect.
+ */
 bool detectedIntersection(Line l1, Line l2);
+
+/**
+ * @brief Calculates the intersection point if two lines intersect.
+ *
+ * @param l1 first Line.
+ * @param l2 second Line.
+ * @return Point The intersection point of l1 and l2
+ */
 Point calculateIntersection(Line l1, Line l2);
+
+/**
+ * @brief Checks if a point is to the left, right or on a line passing through two points.
+ *
+ * @param p First point through which the line passes.
+ * @param q Point whose orientation is to be found wrt the line
+ * @param r Second through which the line passes.
+ * @return int 0 if q is on the directed line from point p to point r.
+ * 1 if q is to the right of the directed line.
+ * 2 if q is to the left of the directed line.
+ */
 int orientation(Point p, Point q, Point r);
+
+/**
+ * @brief Checks whether a point is on a line segment or not.
+ *
+ * @param p First endpoint of the line segment.
+ * @param q The point which will be checked whether it is present on the line segment or not.
+ * @param r Second endpoint of the line segment.
+ * @return true if q is on the line segment joining points p and r.
+ * @return false if q is not on the line segment joining points p and r.
+ */
 bool onSegment(Point p, Point q, Point r);
 
 FILE *inputFile = fopen("input.txt", "r");
@@ -83,13 +201,10 @@ void createSet(Point *p)
 
 void handleEventPoint(Point p)
 {
-    cout << (p.u)->root;
-    (p.u)->printTraversals((p.u)->root);
     int segments = ((p.l)->root != NULL) + ((p.u)->root != NULL) + ((p.c)->root != NULL);
-    // cout << segments << '\n';
     if (segments > 1) // report intersection point
     {
-        // print point and its intersecting lines (all the lines present in p.l, p.u and p.c)
+        // print intersection point
         cout << "Point: " << p;
         intersections++;
     }
@@ -256,9 +371,6 @@ bool onSegment(Point p, Point q, Point r)
 
     if ((c2 || c1) && (c4 || c3) && (c6 || c5) && (c8 || c7))
         return true;
-
-    // if (q.x <= max(p.x, r.x) && q.x >= min(p.x, r.x) && q.y <= max(p.y, r.y) && q.y >= min(p.y, r.y))
-    // return true;
 
     return false;
 }

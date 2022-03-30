@@ -3,7 +3,7 @@
 #include ".\headers\SLine.h"
 #include ".\headers\SNode.h"
 #include ".\headers\status.h"
-#include "SBalancedBST.cpp"
+#include ".\SBalancedBST.cpp"
 
 using namespace std;
 

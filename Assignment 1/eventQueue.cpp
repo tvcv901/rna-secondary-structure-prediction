@@ -2,7 +2,7 @@
 #include ".\headers\Point.h"
 #include ".\headers\EQNode.h"
 #include ".\headers\EventQueue.h"
-#include "EQBalancedBST.cpp"
+#include ".\EQBalancedBST.cpp"
 
 using namespace std;
 
