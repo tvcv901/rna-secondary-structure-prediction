@@ -1,0 +1,34 @@
+\hypertarget{index_problem_statement_sec}{}\doxysection{Problem Statement}\label{index_problem_statement_sec}
+We are given a set of {\ttfamily n} line segments on a plane. The goal of the problem is to find all the intersections of the line segments and report them.\hypertarget{index_algorithm_sec}{}\doxysection{Algorithm}\label{index_algorithm_sec}
+
+\begin{DoxyItemize}
+\item The sweep line is a horizontal line that sweeps the plane from top to bottom. 
+\item While we sweep the sweep line, we need to keep a track of the line segments that are intersecting the sweep line. These set of line segments form the status. 
+\item As the sweep line moves downwards, line segments get added to the status or removed from the status. 
+\item However, the status only changes at certain points -\/ these points are called event points. 
+\item When status is updated, the algorithm performs some intersection tests to checks whether line segments intersect. If the lines intersect, the intersection point is added to the event queue. 
+\item Once the sweep line reaches the bottom of the plane, we will have all our intersection points. 
+\end{DoxyItemize}\hypertarget{index_implementation_sec}{}\doxysection{Implementation}\label{index_implementation_sec}
+\hypertarget{index_status-subsec}{}\doxysubsection{Status}\label{index_status-subsec}
+The status has the following properties\+: 
+\begin{DoxyItemize}
+\item The status contains the line segments intersected by the sweep line from left to right. 
+\item New lines can be added to the status or existing lines can be deleted from the status. 
+\item The status does not store duplicate line segments 
+\end{DoxyItemize}To implement the status data structure, all the above properties need to be satisfied, which can be achieved with the help of a balanced binary search tree (like AVL tree or a Red-\/\+Black tree).\hypertarget{index_event-queue-subsec}{}\doxysubsection{Event Queue}\label{index_event-queue-subsec}
+The event queue has the following properties\+: 
+\begin{DoxyItemize}
+\item The event queue contains the points stored from top to bottom. If multiple points are present at the same height, then the leftmost point is present in the event queue first. 
+\item New event points can be added to the event queue or existing points can be deleted from the event queue. 
+\item The event queue does not store duplicate points. 
+\end{DoxyItemize}To implement the event queue data structure, all the above properties need to be satisfied, which can also be achieved with the help of a balanced binary search tree. ~\newline
+~\newline
+ With the help of a balanced binary search tree, we can perform insert, find, delete operations in logarithmic (to size of the tree) time.\hypertarget{index_complexity_sec}{}\doxysection{Complexity}\label{index_complexity_sec}
+The total time taken by the sweep line algorithm is {\ttfamily O(nlogn + klogn)}, where\+: 
+\begin{DoxyItemize}
+\item {\ttfamily n} is the number of line segments given 
+\item {\ttfamily k} is the number of intersections for the {\ttfamily n} line segments. 
+\end{DoxyItemize}The running time of the sweep line algorithm is dependent on the input size (number of line segments), as well as the output size (number of intersections). ~\newline
+ Hence the sweep line algorithm is an {\itshape output-\/sensitive} algorithm. ~\newline
+~\newline
+ The space taken by the sweep line algorithm is {\ttfamily O(n)}. 
