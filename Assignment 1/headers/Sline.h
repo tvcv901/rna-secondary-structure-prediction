@@ -34,9 +34,9 @@ struct Line
  * @brief Gets the x-coordinate of the intersection point of the sweep line and another line.
  *
  * @param a The x-coordinate of the intersection point is calculated for the sweep line and and this line.
- * @return float The x-coordinate of the intersection point.
+ * @return double The x-coordinate of the intersection point.
  */
-float getX(Line a);
+double getX(Line a);
 
 /**
  * @brief Compares two line segements and checks if they are the same.
@@ -74,7 +74,7 @@ inline bool operator!=(const Line a, const Line b)
  */
 inline bool operator>(const Line a, const Line b)
 {
-    float x1 = getX(a), x2 = getX(b);
+    double x1 = getX(a), x2 = getX(b);
     return (x1 > x2);
 }
 
@@ -88,7 +88,7 @@ inline bool operator>(const Line a, const Line b)
  */
 inline bool operator>=(const Line a, const Line b)
 {
-    float x1 = getX(a), x2 = getX(b);
+    double x1 = getX(a), x2 = getX(b);
     return (isEqual(x1, x2) || x1 > x2);
 }
 
@@ -118,10 +118,10 @@ inline bool operator<=(const Line a, const Line b)
     return !(a > b);
 }
 
-float getX(Line a)
+double getX(Line a)
 {
-    float m_inv = (a.p2.x - a.p1.x) / (a.p2.y - a.p1.y);
-    float x = a.p1.x + (y_sweepLine - a.p1.y) * m_inv;
+    double m_inv = (a.p2.x - a.p1.x) / (a.p2.y - a.p1.y);
+    double x = a.p1.x + (y_sweepLine - a.p1.y) * m_inv;
     return x;
 }
 

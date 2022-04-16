@@ -23,7 +23,7 @@ int EQBalancedBST::getHeight(PointNode *curNode)
     return curNode->height;
 }
 
-Point EQBalancedBST::createPoint(float x, float y)
+Point EQBalancedBST::createPoint(double x, double y)
 {
     Point p;
     p.x = x;

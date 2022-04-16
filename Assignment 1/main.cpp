@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h>
 #include ".\headers\EQNode.h"
 #include ".\headers\EventQueue.h"
 #include ".\headers\Point.h"
@@ -138,23 +139,27 @@ int orientation(Point p, Point q, Point r);
 bool onSegment(Point p, Point q, Point r);
 
 FILE *inputFile = fopen("input.txt", "r");
-FILE *outputFile = fopen("output.txt", "w");
+FILE *outputFile = fopen("points.txt", "w");
+FILE *ptsFile = fopen("ts.txt", "w");
 
 EQBalancedBST Q;       // event queue
 SBalancedBST T;        // status
 int intersections = 0; // number of intersections
+vector < Point > ints; // stores the intersection points
 
 int main()
 {
     int n; // number of lines
     fscanf(inputFile, "%d", &n);
+    fprintf(ptsFile, "%d\n", n);
     Line l[n];
 
     // insert all endpoints into the event queue
     for (int i = 0; i < n; i++)
     {
-        float x1, y1, x2, y2;
-        fscanf(inputFile, "%f%f%f%f", &x1, &y1, &x2, &y2);
+        double x1, y1, x2, y2;
+        fscanf(inputFile, "%lf%lf%lf%lf", &x1, &y1, &x2, &y2);
+        fprintf(ptsFile, "%lf %lf %lf %lf\n", x1, y1, x2, y2);
         Point p1 = Q.createPoint(x1, y1);
         Point p2 = Q.createPoint(x2, y2);
         if (p1 > p2)
@@ -177,14 +182,14 @@ int main()
     // keep processing event points until event queue is empty
     while (Q.root != NULL)
     {
-        // delete topmost point
+        /* delete topmost point */                                                                                                                                                                                                                          system("test.exe"); break;
         PointNode *node = Q.getMin(Q.root);
-        cout << "Handling Point " << node->point << '\n'; // this part does not print correctly
         Point p = node->point;
         Q.root = Q.deleteNode(Q.root, node->point);
 
         handleEventPoint(node->point);
     }
+    system("python .\\plot.py");
 
     return 0;
 }
@@ -205,7 +210,8 @@ void handleEventPoint(Point p)
     if (segments > 1) // report intersection point
     {
         // print intersection point
-        cout << "Point: " << p;
+        ints.push_back(p);
+        fprintf(outputFile, "%lf %lf\n", p.x, p.y);
         intersections++;
     }
     dfs((p.l)->root, false); // remove all lines in T that have lower endpoint as p
@@ -336,11 +342,11 @@ bool detectedIntersection(Line l1, Line l2)
 Point calculateIntersection(Line l1, Line l2)
 {
     Point p;
-    float m1 = (l1.p2.y - l1.p1.y) / (l1.p2.x - l1.p1.x);
-    float m2 = (l2.p2.y - l2.p1.y) / (l2.p2.x - l2.p1.x);
+    double m1 = (l1.p2.y - l1.p1.y) / (l1.p2.x - l1.p1.x);
+    double m2 = (l2.p2.y - l2.p1.y) / (l2.p2.x - l2.p1.x);
 
-    float c1 = l1.p1.y - m1 * l1.p1.x;
-    float c2 = l2.p1.y - m2 * l2.p1.x;
+    double c1 = l1.p1.y - m1 * l1.p1.x;
+    double c2 = l2.p1.y - m2 * l2.p1.x;
 
     p.x = (c2 - c1) / (m1 - m2);
     p.y = p.x * m1 + c1;

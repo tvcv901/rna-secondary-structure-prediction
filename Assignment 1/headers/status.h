@@ -38,7 +38,7 @@ public:
      * @param y The y-coordinate of the point to be created.
      * @return Point The point with coordinates (x, y).
      */
-    Point createPoint(float x, float y);
+    Point createPoint(double x, double y);
 
     /**
      * @brief Create a Line object.
@@ -50,7 +50,7 @@ public:
      * @param lineNo index of the line.
      * @return Line The Line with endpoints (x1, y1) and (x2, y2).
      */
-    Line createLine(float x1, float y1, float x2, float y2, int lineNo);
+    Line createLine(double x1, double y1, double x2, double y2, int lineNo);
 
     /**
      * @brief Create a Node object.

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool isEqual(float a, float b);
+bool isEqual(double a, double b);
 
 class SBalancedBST;
 
@@ -17,8 +17,8 @@ class SBalancedBST;
  */
 struct Point
 {
-    float x;
-    float y;
+    double x;
+    double y;
 
     /**
      * @brief l is the set of line segments whose lower endpoint is at this point.
@@ -40,14 +40,14 @@ struct Point
 };
 
 /**
- * @brief Checks whether two float values differ within a small value EPSILON.
+ * @brief Checks whether two double values differ within a small value EPSILON.
  *
- * @param a first float.
- * @param b second float.
+ * @param a first double.
+ * @param b second double.
  * @return true if a and b differ by less than EPSILON.
  * @return false if a and b differ by more than or equal to EPSILON.
  */
-bool isEqual(float a, float b)
+bool isEqual(double a, double b)
 {
     return fabs(a - b) < EPSILON;
 }

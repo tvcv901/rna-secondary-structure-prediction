@@ -8,8 +8,8 @@ n_lines = int(lines[0])
 n_intersects = int(lines[n_lines + 1])
 
 fig1, ax = plt.subplots()
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 10)
+ax.set_xlim(-10, 10)
+ax.set_ylim(-10, 10)
 ax.set_box_aspect(1)
 plt.grid()
 for line in lines[1:n_lines+1]:

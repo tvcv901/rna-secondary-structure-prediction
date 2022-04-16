@@ -37,7 +37,7 @@ public:
      * @param y The y-coordinate of the point to be created.
      * @return Point The point with coordinates (x, y).
      */
-    Point createPoint(float x, float y);
+    Point createPoint(double x, double y);
 
     /**
      * @brief Create a PointNode object.

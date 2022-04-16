@@ -20,7 +20,7 @@ int SBalancedBST::getHeight(LineNode *curNode)
     return curNode->height;
 }
 
-Point SBalancedBST::createPoint(float x, float y)
+Point SBalancedBST::createPoint(double x, double y)
 {
     Point p;
     p.x = x;
@@ -28,7 +28,7 @@ Point SBalancedBST::createPoint(float x, float y)
     return p;
 }
 
-Line SBalancedBST::createLine(float x1, float y1, float x2, float y2, int lineNo)
+Line SBalancedBST::createLine(double x1, double y1, double x2, double y2, int lineNo)
 {
     Line l;
     l.p1 = createPoint(x1, y1);
