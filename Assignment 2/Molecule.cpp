@@ -150,6 +150,12 @@ public:
             cout << sequence[matches[i].i] << "---" << sequence[matches[i].j] << "  (" << matches[i].i << ", " << matches[i].j << ")\n";
     }
 
+    void printBases()
+    {
+        for (int i = 0; i < ans; i++)
+            cout << matches[i].i << " " << matches[i].j << " " << sequence[matches[i].i] << " " << sequence[matches[i].j] << '\n';
+    }
+
     double getExecutionTime()
     {
         return exec_time.count();
@@ -173,6 +179,11 @@ int main()
     cout << "The base pairs are:\n";
     rnaSequence.printPairs();
     cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+
+    freopen("rna_secondary_structure.txt", "w", stdout);
+    cout << rnaSequence.getSequence() << '\n';
+    cout << rnaSequence.getMaxMatchings() << '\n';
+    rnaSequence.printBases();
 
     return 0;
 }
