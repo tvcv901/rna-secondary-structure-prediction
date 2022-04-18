@@ -21,8 +21,10 @@ private:
 
     string sequence;                           // stores the RNA sequence
     int len;                                   // stores the length of the RNA sequence
-    long long **maxMatchings;                  // table where maxMatchings[i][j] = maximum number of bonds that can be formed between indices i and j where i < j
-    Match **matches;                           // stores the base pairs
+    int ans;                                   // stores the maximum number of base pairs
+    int **maxMatchings;                        // table where maxMatchings[i][j] = maximum number of bonds that can be formed between indices i and j where i < j
+    Match *matches;                            // stores the base pairs
+    int curMatches;                            // number of base pairs found so far
     chrono::duration<double, milli> exec_time; // stores the time (in ms) taken to calulcate the maximum number of bonds
 
     void calculateMaxMatchings()
@@ -39,16 +41,53 @@ private:
                 maxMatchings[i][j] = maxMatchings[i][j - 1];
                 for (int t = i; t <= j; t++)
                 {
-                    if (isValidPairing(sequence[i], sequence[j]) && !isKink(i, t))
+                    if (isValidPairing(sequence[t], sequence[j]) && !isKink(t, j))
                     {
-                        if (t == j)
-                            maxMatchings[i][j] = max(maxMatchings[i][j], 1 + maxMatchings[i + 1][t - 1]);
+                        if (t == i)
+                            maxMatchings[i][j] = max(maxMatchings[i][j], 1 + maxMatchings[t + 1][j - 1]);
                         else
-                            maxMatchings[i][j] = max(maxMatchings[i][j], 1 + maxMatchings[i + 1][t - 1] + maxMatchings[t + 1][j]);
+                            maxMatchings[i][j] = max(maxMatchings[i][j], 1 + maxMatchings[i][t - 1] + maxMatchings[t + 1][j - 1]);
                     }
                 }
             }
         }
+        ans = maxMatchings[0][len - 1];
+    }
+
+    void calculateMatchings(int l, int r)
+    {
+        if (curMatches == ans || maxMatchings[l][r] == 0)
+            return;
+
+        if (isValidPairing(sequence[l], sequence[r]) && !isKink(l, r))
+        {
+            if (maxMatchings[l + 1][r - 1] + 1 == maxMatchings[l][r])
+            {
+                matches[curMatches].i = l;
+                matches[curMatches].j = r;
+                curMatches++;
+                calculateMatchings(l + 1, r - 1);
+                return;
+            }
+        }
+
+        for (int t = l + 1; t <= r; t++)
+        {
+            if (isValidPairing(sequence[t], sequence[r]) && !isKink(t, r))
+            {
+                if (maxMatchings[l][t - 1] + maxMatchings[t + 1][r - 1] + 1 == maxMatchings[l][r])
+                {
+                    matches[curMatches].i = t;
+                    matches[curMatches].j = r;
+                    curMatches++;
+                    calculateMatchings(l, t - 1);
+                    calculateMatchings(t + 1, r - 1);
+                    return;
+                }
+            }
+        }
+
+        calculateMatchings(l, r - 1);
     }
 
 public:
@@ -62,9 +101,9 @@ public:
         setSequence(seq);
         len = seq.length();
 
-        maxMatchings = new long long *[len];
+        maxMatchings = new int *[len];
         for (int i = 0; i < len; i++)
-            maxMatchings[i] = new long long[len];
+            maxMatchings[i] = new int[len];
 
         for (int i = 0; i < len; i++)
             for (int j = 0; j < len; j++)
@@ -75,9 +114,9 @@ public:
         auto stop = chrono::high_resolution_clock::now();
         exec_time = chrono::duration_cast<chrono::microseconds>(stop - start);
 
-        matches = new Match *[len];
-        for (int i = 0; i < len; i++)
-            matches[i] = new Match[len];
+        matches = new Match[ans];
+        curMatches = 0;
+        calculateMatchings(0, len - 1);
     }
 
     int getSequenceLength()
@@ -90,9 +129,9 @@ public:
         return sequence;
     }
 
-    long long getMaxMatchings()
+    int getMaxMatchings()
     {
-        return maxMatchings[0][len - 1];
+        return ans;
     }
 
     void printTable()
@@ -105,6 +144,12 @@ public:
         }
     }
 
+    void printPairs()
+    {
+        for (int i = 0; i < ans; i++)
+            cout << sequence[matches[i].i] << "---" << sequence[matches[i].j] << "  (" << matches[i].i << ", " << matches[i].j << ")\n";
+    }
+
     double getExecutionTime()
     {
         return exec_time.count();
@@ -113,8 +158,8 @@ public:
 
 int main()
 {
-    // freopen(".\\data\\ndb_test_cases\\unique_rna_sequences.txt", "r", stdin);
-    // freopen("output.txt", "w", stdout);
+    // freopen(".\\data\\timing_input.txt", "r", stdin);
+    // freopen("timing_output.txt", "w", stdout);
 
     string seq;
     cin >> seq;
@@ -125,6 +170,8 @@ int main()
     cout << "Length of the RNA sequence:        " << rnaSequence.getSequenceLength() << '\n';
     cout << "Maximum number of base pairs:      " << rnaSequence.getMaxMatchings() << '\n';
     cout << "Time taken to calculate max pairs: " << fixed << setprecision(3) << rnaSequence.getExecutionTime() << "ms\n";
+    cout << "The base pairs are:\n";
+    rnaSequence.printPairs();
     cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
 
     return 0;
