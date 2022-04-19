@@ -1,0 +1,34 @@
+\hypertarget{index_problem_statement_sec}{}\doxysection{Problem Statement}\label{index_problem_statement_sec}
+We are given a RNA sequence which is a string consisting of the characters in the set of nitrogenous bases $\{A, C, G, U\}$. The task is to predict the secondary RNA structure for the given RNA sequence which also satifies the following constraints\+: 
+\begin{DoxyEnumerate}
+\item $A$ can form a pair only with $U$, and $C$ can form a pair only with $G$ 
+\item There should be no knots in the secondary structure (two base pairs cannot overlap or cross each other) 
+\item There should be no kinks in the secondary structure (two bases cannot form a pair if they are close to each other. In this problem, the bases cannot form a pair if there are less than 5 between them) 
+\item Each base can form a pair at most once (the same base cannot be a part of two different pairs) 
+\end{DoxyEnumerate}\hypertarget{index_algorithm_sec}{}\doxysection{Algorithm}\label{index_algorithm_sec}
+The optimal solution to the above problem uses a dynamic programming approach. Let $dp(i, j)$ be the maximum number of base pairs that can be formed without violating the above constraints in the range $[i, j]$, where $1 \le i, j \le len(sequence)$. ~\newline
+ ~\newline
+The solution for $dp(i, j)$ is given as\+: ~\newline
+ \[dp(i, j) = \begin{cases} 0 & i \ge j - 4 \\ \max \begin{cases} dp(i, j - 1), \\ \underset{\forall t \in [i, j - 1]}\max \{dp(i, t - 1) + dp(t + 1, j - 1) + 1\} \end{cases} & otherwise \end{cases}\] The solution to the overall problem is finding the maximum number of base pairs for the given RNA sequence, which is $dp(1, len(sequence))$. \hypertarget{index_understanding_the_equation}{}\doxysubsection{Understanding the Equation}\label{index_understanding_the_equation}
+Suppose we are trying to find the maximum number of base pairs that can be formed in the interval $[i, j]$.  From the figure, suppose the bases at positions $t (t \in [i, j - 1])$ and $j$ can be paired. The problem $[i, j]$ gets split into two subproblems because of the pairing. ~\newline
+The first subproblem (highlighted in orange) is for the interval $[i, t - 1]$, whose solution is $dp(i, t - 1)$, and ~\newline
+The second subproblem (highlighted in yellow) is for the interval $[t + 1, j - 1]$, whose solution is $dp(t + 1, j - 1)$. ~\newline
+ ~\newline
+Hence, $dp(i, j)$ will be the sum of (assuming that pairing $t$ and $j$ gives the maximum)\+: 
+\begin{DoxyItemize}
+\item $dp(i, t - 1)$ (the first subproblem) 
+\item $dp(t + 1, j - 1)$ (the second subproblem) 
+\item $1$ (for the pair $(t, j)$) 
+\end{DoxyItemize}\hypertarget{index_implementation_section}{}\doxysection{Implementation}\label{index_implementation_section}
+Each RNA sequence has a matrix and an array of base pairs associated with it. We use a matrix $maxMatchings$ of size $n$ x $n$, where $n$ is the length of the RNA sequence. $maxMatchings[i][j]$ is the maximum number of base pairs that can be obtained in the interval $[i, j]$ without violating the constraints. This matrix is used to get the array of base pairs of the secondary structure of RNA.\hypertarget{index_Complexity}{}\doxysection{Complexity}\label{index_Complexity}
+Let $T(n)$ be the running time to solve the problem whose RNA sequence is of length $n$. We have the recurrence relation\+: ~\newline
+ $T(n > 5) = \sum_{t = 0}^{n - 2}T(n - 2 - t) * T(t)$, ~\newline
+ $T(n \le 4) = c$ ~\newline
+On solving the recurrence relation, we get that T(n) is exponential with $n$. ~\newline
+ ~\newline
+Notice that we solve the same subproblem multiple times if the recursive approach is used. To avoid this, we can store the answer to the subproblem once it has been solved. If we come across the same subproblem again, we can obtain it directly from the stored values, instead of solving the subproblem again. This step is known as memoization. ~\newline
+ \hypertarget{index_order_of_subproblems}{}\doxysubsection{Order of Subproblems}\label{index_order_of_subproblems}
+Suppose we have the problem in the interval $[i, j]$. The solution for this problem depends on subproblem(s) of size(s) smaller than the interval $[i, j]$. ~\newline
+Hence, in order to solve a bigger problem, we need to solve the problems of smaller sizes first. Therefore, we need to solve the subproblems of smallest size first (starting with size $6$ for this problem). Following the above ordering to solve the subproblems and using memoization, the time complexity of the solution becomes $O(n^3)$. ~\newline
+ ~\newline
+For memoization, we are storing the answer for each subproblem $[i, j]$ $1 \le i \le j \le n$. The total number of subproblems can be calculated as $\sum_{i = 1}^{n} \sum_{j = i}^{n} 1$, which is $O(n^2)$. Hence, the space complexity for the solution is $O(n^2)$. 

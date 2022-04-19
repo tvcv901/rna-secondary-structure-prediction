@@ -1,0 +1,119 @@
+\hypertarget{class_molecule}{}\doxysection{Molecule Class Reference}
+\label{class_molecule}\index{Molecule@{Molecule}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_molecule_af2727eb297eb9f587046bcc0c874802d}{set\+Sequence}} (string seq)
+\begin{DoxyCompactList}\small\item\em Set the RNA sequence for the object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_molecule_ad6cb916ae585ed74455d1cdb38555ac3}{Molecule}} (string seq)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_molecule}{Molecule}} object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_molecule_a21f365c3a819a1205268f168392c26c4}{get\+Sequence\+Length}} ()
+\begin{DoxyCompactList}\small\item\em Get the length of the RNA sequence. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_molecule_ad4e31955ecc2af19ddacb0cdc2a55daf}{get\+Sequence}} ()
+\begin{DoxyCompactList}\small\item\em Get the RNA sequence. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_molecule_aa595ae489389c9a60f52cb20b1dab24f}{get\+Max\+Matchings}} ()
+\begin{DoxyCompactList}\small\item\em Get the maximum number of base pairs that can be formed from the RNA sequence. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_molecule_aa69ef43e6ce7a3bec7fc83d6a7f1dd8b}\label{class_molecule_aa69ef43e6ce7a3bec7fc83d6a7f1dd8b}} 
+void {\bfseries print\+Table} ()
+\begin{DoxyCompactList}\small\item\em Prints the memoization table. table\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} represents the maximum number of base pairs that can be formed in the interval \mbox{[}i, j\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_molecule_ac7340fa7a97e2975ed10cf4f69d173b1}\label{class_molecule_ac7340fa7a97e2975ed10cf4f69d173b1}} 
+void {\bfseries print\+Pairs} ()
+\begin{DoxyCompactList}\small\item\em Prints the base pairs. Each line of the output is of the format\+: first nitrogenous base --- second nitrogenous base, (position of first base, position of second base) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_molecule_a68cb9b4d8f71759115776ed0bc8d9d81}\label{class_molecule_a68cb9b4d8f71759115776ed0bc8d9d81}} 
+void {\bfseries print\+Bases} ()
+\begin{DoxyCompactList}\small\item\em Prints the base pairs. Each line of the output is of the format\+: position of first base, position of second base, first nitrogenous base, second nitrogenous base. The output consists of k lines, where k is the maximum number of base pairs that can be formed for the RNA sequence. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_molecule_abef38864a1ecb8b5c56d5140e8a7e49b}{get\+Execution\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Get the time taken to calculate the maximum number of base pairs (filling the memoization table). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_molecule_ad6cb916ae585ed74455d1cdb38555ac3}\label{class_molecule_ad6cb916ae585ed74455d1cdb38555ac3}} 
+\index{Molecule@{Molecule}!Molecule@{Molecule}}
+\index{Molecule@{Molecule}!Molecule@{Molecule}}
+\doxysubsubsection{\texorpdfstring{Molecule()}{Molecule()}}
+{\footnotesize\ttfamily Molecule\+::\+Molecule (\begin{DoxyParamCaption}\item[{string}]{seq }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_molecule}{Molecule}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seq} & The RNA sequence \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_molecule_abef38864a1ecb8b5c56d5140e8a7e49b}\label{class_molecule_abef38864a1ecb8b5c56d5140e8a7e49b}} 
+\index{Molecule@{Molecule}!getExecutionTime@{getExecutionTime}}
+\index{getExecutionTime@{getExecutionTime}!Molecule@{Molecule}}
+\doxysubsubsection{\texorpdfstring{getExecutionTime()}{getExecutionTime()}}
+{\footnotesize\ttfamily double Molecule\+::get\+Execution\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the time taken to calculate the maximum number of base pairs (filling the memoization table). 
+
+\begin{DoxyReturn}{Returns}
+double The time taken to calculate the maximum number of base pairs that can be formed from the RNA sequence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_molecule_aa595ae489389c9a60f52cb20b1dab24f}\label{class_molecule_aa595ae489389c9a60f52cb20b1dab24f}} 
+\index{Molecule@{Molecule}!getMaxMatchings@{getMaxMatchings}}
+\index{getMaxMatchings@{getMaxMatchings}!Molecule@{Molecule}}
+\doxysubsubsection{\texorpdfstring{getMaxMatchings()}{getMaxMatchings()}}
+{\footnotesize\ttfamily int Molecule\+::get\+Max\+Matchings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the maximum number of base pairs that can be formed from the RNA sequence. 
+
+\begin{DoxyReturn}{Returns}
+int The maximum number of base pairs for the RNA sequence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_molecule_ad4e31955ecc2af19ddacb0cdc2a55daf}\label{class_molecule_ad4e31955ecc2af19ddacb0cdc2a55daf}} 
+\index{Molecule@{Molecule}!getSequence@{getSequence}}
+\index{getSequence@{getSequence}!Molecule@{Molecule}}
+\doxysubsubsection{\texorpdfstring{getSequence()}{getSequence()}}
+{\footnotesize\ttfamily string Molecule\+::get\+Sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the RNA sequence. 
+
+\begin{DoxyReturn}{Returns}
+string The RNA sequence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_molecule_a21f365c3a819a1205268f168392c26c4}\label{class_molecule_a21f365c3a819a1205268f168392c26c4}} 
+\index{Molecule@{Molecule}!getSequenceLength@{getSequenceLength}}
+\index{getSequenceLength@{getSequenceLength}!Molecule@{Molecule}}
+\doxysubsubsection{\texorpdfstring{getSequenceLength()}{getSequenceLength()}}
+{\footnotesize\ttfamily int Molecule\+::get\+Sequence\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the length of the RNA sequence. 
+
+\begin{DoxyReturn}{Returns}
+int The length of the RNA sequence 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_molecule_af2727eb297eb9f587046bcc0c874802d}\label{class_molecule_af2727eb297eb9f587046bcc0c874802d}} 
+\index{Molecule@{Molecule}!setSequence@{setSequence}}
+\index{setSequence@{setSequence}!Molecule@{Molecule}}
+\doxysubsubsection{\texorpdfstring{setSequence()}{setSequence()}}
+{\footnotesize\ttfamily void Molecule\+::set\+Sequence (\begin{DoxyParamCaption}\item[{string}]{seq }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the RNA sequence for the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seq} & The RNA sequence \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Molecule.\+cpp\end{DoxyCompactItemize}
