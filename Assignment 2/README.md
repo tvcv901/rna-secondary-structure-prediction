@@ -3,7 +3,7 @@
 #### Group members:
 
 - T V Chandra Vamsi (2019A7PS0033H)
-- Ruban S (2019A7PS0064H)
+- Ruban S (2019A7PS0097H)
 - Sathvik B (2019A7PS1200H)
 - Kaustubh Bhanj (2019A7PS0009H)
 
@@ -71,9 +71,11 @@ Return $OPT(1,n)$
 
 <h2 id="implementation">Implementation Details</h2>
 
-Since the recurrence relation has two dimensions, a double-dimensional array `maxMatchings` is used for storing the values of $OPT$. Three `for` loops are used to iterate over the double-dimensional array to compute every possible sub-problem.
+Since the recurrence relation has two dimensions, a double-dimensional array `maxMatchings` is used for storing the values of $OPT$. Three `for` loops are used to iterate over the double-dimensional array to compute the answer every possible sub-problem.
 
-A structure `Match` is used to store the indices of the matching base pairs.
+A structure `Match` is used to store the indices of the matching base pair.
+
+The array `matches` is used for storing all the base pairs obtained as per the dynamic programming logic.
 
 <br>
 
