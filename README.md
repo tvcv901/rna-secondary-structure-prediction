@@ -39,7 +39,7 @@
 
 `Molecule.cpp` - contains implementation for the dynamic programming approach
 
-### Steps to run `eventQueue.cpp` and `status.cpp` (Works only in a Windows environment)
+### Steps to run and visualize the algorithm
 
 1. Open Command Prompt or Powershell and run `.\molecule.bat` to input an RNA sequence.
 
