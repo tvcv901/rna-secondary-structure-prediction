@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 align="center">CS F364 Assignment 2</h1>
+<h4 id="group-members">Group members:</h4>
+<ul>
+<li>T V Chandra Vamsi (2019A7PS0033H)</li>
+<li>Ruban S (2019A7PS0064H)</li>
+<li>Sathvik B (2019A7PS1200H)</li>
+<li>Kaustubh Bhanj (2019A7PS0009H)</li>
+</ul>
+<br>
+<h2>Problem Statement</h2>
+<p>The aim of the problem is to obtain a secondary structure of maximum energy (The energy of a secondary structure is proportional to the number of base
+pairs in it) from a given RNA sequence while following the given <a href="#rules">rules</a>.</p>
+<h3 id="rules">Rules</h3>
+<ul>
+<li>
+<p>An RNA molecule is a string $B = b_1 b_ 2 \ldots b_n; ; b_i \in { A, C, G, U } ; \forall ; 1 \leq i \leq n$</p>
+</li>
+<li>
+<p>The pairing of bases are as follows</p>
+<ul>
+<li><strong>A</strong>denine always matches with <strong>U</strong>racil.</li>
+<li><strong>C</strong>ytosine always matches with <strong>G</strong>uanine.</li>
+</ul>
+</li>
+<li>
+<p>Every base pairs with atmost one other base</p>
+</li>
+<li>
+<p>(No sharp turns) The ends of each pair are separated by at least 4 intervening bases i.e. if $b_i b_j$ is a pairing, then $i &lt; j-4$</p>
+</li>
+<li>
+<p>(No knots) If $b_i b_j$ and $b_k b_l$ are two pairings, then we cannot have $i &lt; k &lt; j &lt; l$</p>
+</li>
+</ul>
+<br>
+<h2>Dynamic Programming Approach</h2>
+<p>Using the Dynamic Programming Approach, we consider the entire problem made up of smaller sub-problems that can be recursively solved. Here, a subproblem is defined as finding the maximum number of base pairings for a particular subsequence.</p>
+<p>$OPT(i,j)$ is the maximum number of base pairs in a secondary structure for $b_i b_{i+1} \ldots b_j$. Hence, the solution for the problem is $OPT(1,n)$, where $n$ is the length of the RNA sequence.</p>
+<p>If $i &gt; j-4$, then $OPT(i,j) = 0$.</p>
+<p>In the optimal secondary structure on $b_i b_{i+1} \ldots b_j$,</p>
+<ul>
+<li>If $j$ is not a member of any pair in the subsequence, use $OPT(i,j-1)$</li>
+<li>If $j$ pairs with some $t &lt; j - 4$, the knot condition yields two independent sub-problems; $OPT(i,t-1)$ and $OPT(t+1,j-1)$.</li>
+</ul>
+<p id="recurrence">From this, we arrive at the recurrence relation
+<p>$$
+OPT(i,j) = \max
+\begin{cases}
+OPT(i,j-1),\
+\max_t (1+OPT(i,t-1)+OPT(t+1,j-1))
+\end{cases}
+$$</p>
+</p>
+<p>From the above recurrence relation, it can be seen that there are $O(n^2)$ subproblems.</p>
+<p>Note that computing $OPT(i,j)$ involves sub-problems $OPT(l,m)$
+where $m-l &lt; j-i$. Hence, the way to solve this recurrence relation is to first solve all subproblems of size $s-1$ before moving on to subproblems of size $s$. This is described in the psuedocode mentioned below.</p>
+<p>Initialize $OPT(i,j)=0$ whenever $i \geq j-4$<br>
+For $k = 5,6, \ldots n-1$<br>
+    For $i = 1, 2, \ldots n-k$<br>
+        Set $j=i+k$<br>
+        Compute $OPT(i,j)$ using the recurrence relation<br>
+    Endfor<br>
+Endfor<br>
+Return $OPT(1,n)$</p>
+<br>
+<h2 id="implementation">Implementation Details</h2>
+<p>Since the recurrence relation has two dimensions, a double-dimensional array <code>maxMatchings</code> is used for storing the values of $OPT$. Three <code>for</code> loops are used to iterate over the double-dimensional array to compute every possible sub-problem.</p>
+<p>A structure <code>Match</code> is used to store the indices of the matching base pairs.</p>
+<br>
+<h2>Time Complexity Analysis</h2>
+<p>In the function <code>calculateMaxMatchings()</code>, the outermost loop runs from $s = 6 ; to ; n$.</p>
+<p>The middle loop runs from $i = 0 ; to ; n+s-1$.</p>
+<p>The innermost loop runs from $t = i ; to ; j$, where $j = i+s-1$.</p>
+<p>Since there are no <code>break</code> statements inside any of the loops, the maximum number of times the statements in the innermost loop can be found by</p>
+<p>$\sum_{s=6}^{n} {\sum_{i=0}^{n+s-1} {\sum_{t=i}^{i+s-1} {O(1)}}}$</p>
+<p>$= \sum_{s=6}^{n} {\sum_{i=0}^{n+s-1} {(i+s-1-i+1) \cdot {O(1)}}}$</p>
+<p>$= \sum_{s=6}^{n} {\sum_{i=0}^{n+s-1} {s \cdot {O(1)}}}$</p>
+<p>$= \sum_{s=6}^{n} {s(n+s-1-0+1) \cdot {O(1)}}$</p>
+<p>$= \sum_{s=6}^{n} {s(n+s)\cdot {O(1)}}$</p>
+<p>$= \sum_{s=6}^{n} {(s^2 + ns) \cdot O(1)}$</p>
+<p>$= O(1) \cdot \sum_{s=6}^{n} {(s^2 + ns) }$</p>
+<p>$= O(1) \cdot (\sum_{s=6}^{n} {s^2} + \sum_{s=0}^{n} {ns})$</p>
+<p>$= O(1) \cdot (\sum_{s=6}^{n} {s^2} + n\sum_{s=0}^{n} {s})$</p>
+<p>$= O(1) \cdot ((\sum_{s=0}^{n} {s^2} - \sum_{s=0}^{6} {s^2}) + n(\sum_{s=0}^{n} {s} - \sum_{s=6}^{n} {s}))$</p>
+<p>$= O(1) \cdot ((\dfrac{n(n+1)(2n+1)}{6} - \dfrac{6(6+1)(2(6)+1)}{6}) + n(\dfrac{n(n+1)}{2} - \dfrac{6(6+1)}{2}))$</p>
+<p>$= O(1) \cdot ((\dfrac{n^3}{3}+\dfrac{n^2}{2}+\dfrac{n}{6} - 91) + n(\dfrac{n^2}{2}+\dfrac{n}{2} - 21))$</p>
+<p>$= O(1) \cdot (\dfrac{n^3}{3}+\dfrac{n^2}{2}+\dfrac{n}{6} - 91 + \dfrac{n^3}{2}+\dfrac{n^2}{2} - 21n)$</p>
+<p>$= O(1) \cdot (\dfrac{2n^3}{3}+n^2-\dfrac{125n}{6} - 91)$</p>
+<p>$= O(n^3)$</p>
+<br>
+<h2>Timing Analysis</h2>
+<p><img align="center" src="./plots/timing_analysis.png"></img></p>
+<p>From the above plot, it can be seen that the actual time taken $t$ can be approximated by the curve $t = \dfrac{n^3}{400000}$, which is indeed $O(n^3)$.</p>
+<br>
+<h2>Space Complexity Analysis</h2>
+<p>As shown in the <a href="#recurrence">the recurrence relation</a>, since there are $O(n^2)$ sub-problems, and each sub-problem requires $O(1)$ space to store its value, the space complexity of the Dynamic Programming Approach is $O(n^2)$.</p>
+<br>
+<h2>Test Cases</h2>
+<p>The code was tested with the Nucleic Acid Database (NDB) by Rutgers University that has 12016 structures as of April 13<sup>th</sup>, 2022.</p>
+<p>Taking an example from the database; $UUGCGUCGCUCCGGAAAAGUCGC$, the base pairings determined by the algorithm are as shown below.</p>
+<img align="center" src="./visualization/UUGCGUCGCUCCGGAAAAGUCGC.png"/>
+<br>
+<h2>Conclusion</h2>
+<p>We see that using <a href="#recurrence">the recurrence relation</a>, the complexity of the algorithm is exponential, however, when we use memoization to store the results of previously computed sub-problems, we see that the time complexity is reduced to polynomial time ($O(n^3)$), at the cost of $O(n^2)$ space.</p>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });</script>
+
+</body>
+</html>

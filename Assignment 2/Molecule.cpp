@@ -300,6 +300,7 @@ int main()
     // freopen("timing_output.txt", "w", stdout);
 
     string seq;
+    cout << "Enter the RNA sequence: ";
     cin >> seq;
 
     cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
