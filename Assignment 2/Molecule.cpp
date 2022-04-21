@@ -53,7 +53,7 @@
  * Let \f$T(n)\f$ be the running time to solve the problem whose RNA sequence is of length \f$n\f$. We have the recurrence relation: \n
  * \f$T(n > 5) = \sum_{t = 0}^{n - 2}T(n - 2 - t) * T(t)\f$, \n
  * \f$T(n \le 4) = c\f$ \n
- * On solving the recurrence relation, we get that T(n) is exponential with \f$n\f$. \n \n
+ * On solving the recurrence relation, we get that \f$T(n)\f$ is exponential with \f$n\f$. \n \n
  * Notice that we solve the same subproblem multiple times if the recursive approach is used. To avoid this, we can store the answer to the subproblem once it has been solved. If we come across the same subproblem again, we can obtain it directly from the stored values, instead of solving the subproblem again.
  * This step is known as memoization. \n
  *

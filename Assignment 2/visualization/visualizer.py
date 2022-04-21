@@ -13,6 +13,7 @@ color_codes = {
 }
 
 seq = f.readline()
+seq = seq.strip('\n')
 len = len(seq.strip('\n'))
 fig, ax = plt.subplots()
 for i in range(len):
@@ -33,6 +34,10 @@ for i in range(pairs):
     plt.scatter(idx2, 0, c=color_codes[base2.strip('\n')], edgecolors='black')
 
 plt.axis('off')
+plt.title("Secondary Structure for RNA Sequence")
 plt.xlim(-1, len)
 plt.ylim(-len/2, len/2)
 plt.show()
+
+fig_name = ('.\\visualization\\examples\\' + seq + '.png').strip('\n')
+fig.savefig(fig_name, dpi=600)
