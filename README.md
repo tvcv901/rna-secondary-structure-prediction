@@ -18,8 +18,6 @@
 
 1. Open Command Prompt or Powershell and run `.\molecule.bat` to input an RNA sequence.
 
-2. To visualize the output,
+2. To see the visualization of the structure, run
 
-   `cd visualization`
-
-   `python visualizer.py`
+   `python .\visualization\visualizer.py`
